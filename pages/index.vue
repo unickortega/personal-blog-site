@@ -1,57 +1,66 @@
 <template>
   <section class="">
-    <div class="background">
-      <img src="/background.jpeg" ref="image">
-      <div class="gradient"></div>
-    </div>
+    <main-cover/>
     <div class="cover-content">
       <h1 style="font-family: 'Lobster', cursive; position:relative; z-index: 13; color: white;">
         Uelmar Ortega
       </h1>
     </div>
-    <div class="content">
-      asd
+    <fixed-background gradient="gray" source="/footer-background.jpg">
+      <div class="container">
+        <div class="col-md-5">
+          <tract/>
+        </div>
+      </div>
+    </fixed-background>
+    <fixed-background gradient="violet" source="/3.jpg">
+      <h1 style="font-family: 'Libre Barcode 39', cursive; color:white;">
+        Sample
+      </h1>
+    </fixed-background>
+    <div class="position-relative">
+      <div class="bg-white min-vh">
+        <div class="container">
+          <blogs/>
+        </div>
+      </div>
+      <div class="container-fluid bg-secondary" style="box-shadow: 0px -12px 20px -9px rgba(0, 0, 0, 0.19);">
+        <div class="row">
+          <div class="col-md-8 p-0">
+            <photo-grid/>
+          </div>
+          <div class="col-md-4 p-0">
+            <flat-card class="card-gray">
+              <template v-slot:header>Lorem ipsum</template>
+              Have you ever wanted to aesthetically group together multiple elements on a page? Have you ever wanted to look classy while you do it? Now you can!
+            </flat-card>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import jQuery from 'jquery'
+import MainCover from '~/components/index/MainCover'
+import FlatCard from '~/components/index/FlatCard'
+import PhotoGrid from '~/components/index/PhotoGrid'
+import Blogs from '~/components/index/Blogs'
+import FixedBackground from '~/components/index/FixedBackground'
+import Tract from '~/components/index/Tract'
 export default {
-  methods: {
-    resizeImage(){
-      var w = this.$refs['image'].width
-      var h = this.$refs['image'].height
-      var hquotient = h / w
-
-      var wh = jQuery(this.$refs['image']).parent().width() * hquotient
-
-      if(wh < jQuery(this.$refs['image']).parent().height()){
-        jQuery(this.$refs['image']).css({
-          height: '101%',
-          width: 'initial'
-        })
-      }
-      else{
-        jQuery(this.$refs['image']).css({
-          width: '101%',
-          height: 'initial'
-        })
-      }
-    }
+  components:{
+    FlatCard,
+    MainCover,
+    PhotoGrid,
+    Blogs,
+    FixedBackground,
+    Tract
   },
-  mounted(){
-    this.resizeImage()
-    window.onresize = ()=>{
-      this.resizeImage()
-    };
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Lobster');
-@import url('https://fonts.googleapis.com/css?family=Jura');
 .cover-content {
   margin: 0 auto;
   min-height: 100vh;
@@ -61,27 +70,7 @@ export default {
   text-align: center;
 }
 
-.background{
-  height: 100vh;
-  position: absolute;
-  width: 100%;
-  overflow: hidden;
-  .gradient{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    top: 0px;
-    background-image: linear-gradient(to bottom right, red, yellow);
-    opacity: 0.3;
-  }
-  img{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%,-50%);
-    transition: 500ms ease all;
-  }
+.min-vh{
+  min-height: 100vh;
 }
 </style>
